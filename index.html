@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="ааа.png" type="image/png">
+	<title>АРХИВ FARMBUSTERS</title>
+
+	<style>
+		@font-face {
+			font-family: "Press Start 2P";
+			src: url("PressStart2P-Regular.ttf") format("truetype");
+		}
+
+		body {
+			background-image: url("starfall-gif-20.gif"); 
+			background-repeat: no-repeat;
+			background-position: center;
+			background-attachment: fixed;
+			background-size: cover;
+			font-family: "Press Start 2P", sans-serif;
+		}
+
+		.main-window {
+			background-color: rgba(255, 255, 255, 0.95); 
+			max-width: 1200px;           
+			margin: 80px auto;          
+			padding: 40px; 
+			min-height: 500px; 
+			border-radius: 0px;        
+			box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
+			text-align: center;         
+			position: relative; 
+		}
+
+		.main-window h1 {
+			color: #222222;             
+			font-size: 20px; 
+			line-height: 1.6; 
+			margin-top: -5px;
+			margin-left: 315px; 
+			text-align: left;
+		}
+
+		.main-window h2 {
+			color: #222222;             
+			font-size: 15px; 
+			line-height: 1.6; 
+			margin-top: -3px;
+			margin-left: 315px; 
+			text-align: left;
+		}
+
+		.image-fixed {
+			position: absolute;
+			top: 30px;  
+			left: 30px;  
+		}
+		.image-fixed img {
+			border: 4px solid #000000; 
+			display: block; 
+		}
+
+		.audio-fixed {
+			position: absolute;
+			top: 200px;  
+			left: 350px;  
+		}
+		.audio-fixed audio {
+			border: 3px solid #000000; 
+			border-radius: 30px;       
+			display: block;
+		}
+
+		.nyan-cat {
+			position: absolute;
+			top: 200px;  
+			left: 670px;  
+		}
+
+.bottom-gif {
+    position: absolute;
+    top: 370px;
+}
+.bottom-gif img {
+    display: block;
+    width: 120px;   
+    height: auto;   
+}
+
+
+.gif-ruvruv   { left: 300px; }
+.gif-sarvsarv { left: 480px; }   
+.gif-kisskiss { left: 660px; }   
+.gif-dekudeku { left: 840px; }      
+
+
+		.menu-box {
+			position: absolute;
+			top: 290px;
+			left: 30px;
+			text-align: left;
+		}
+
+		.pixel-btn {
+			display: inline-block;
+			background-color: #000000;
+			color: #ffffff;
+			border: 4px solid #000000;
+			padding: 12px 18px;
+			font-size: 12px;
+			text-decoration: none;
+			cursor: pointer;
+		}
+		.pixel-btn:hover {
+			background-color: #ffffff;
+			color: #000000;
+		}
+
+		.overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.7);
+			z-index: 999;
+			display: none; /* Скрываем окно */
+		}
+
+		.overlay:target {
+			display: block;
+		}
+
+		.folder-popup {
+			background-color: #ffffff;
+			border: 6px solid #000000;
+			max-width: 700px;
+			min-height: 250px;
+			max-height: 70vh;
+			overflow-y: auto;
+			margin: 5% auto;
+			padding: 30px;
+			position: relative;
+			text-align: center;
+			box-shadow: 0 20px 0 rgba(0,0,0,0.2);
+}
+
+.folder-popup.folder-low {
+    margin-top: 5%;
+    min-height: 250px;
+}
+
+
+		.folder-popup h3 {
+			color: #000000;
+			font-size: 18px;
+			margin-top: 0;
+			margin-bottom: 30px;
+		}
+
+		.close-folder {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+			color: #ff0000;
+			font-size: 18px;
+			text-decoration: none;
+		}
+
+			.member-tabs {
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+			margin-bottom: 30px;
+		}
+		.tab-btn {
+	background-color: #e0e0e0;
+	color: #000000;
+	border: 3px solid #000000;
+	padding: 16px 12px; 
+	font-size: 10px;
+	text-decoration: none;
+
+	margin: 0 10px;
+}
+.tab-btn:hover {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+.member-tabs img {
+	width: 80px;          
+	height: 80px;         
+	border: 3px solid #000000; 
+	margin-bottom: 10px;  
+	object-fit: cover;    
+}
+
+		.music-list {
+			text-align: left;
+			background: #f0f0f0;
+			padding: 15px;
+			padding-left: 30px;
+			font-size: 11px;
+			line-height: 1.8;
+			color: #333333;
+		}
+.song-title {
+	margin: 0;             
+	padding-left: 50px;    
+	text-align: left;      
+}
+
+.folder-popup-gif {
+    position: absolute;
+    bottom: 380px;       
+    right: 65px;        
+    width: 80px;        
+    height: auto;
+}
+
+.folder-popit-gif {
+    position: absolute;
+    bottom: 410px;       
+    right: 350px;        
+    width: 320px;        
+    height: auto;
+animation: rainbow-glow 3s linear infinite;
+}
+
+@keyframes rainbow-glow {
+    0%   { filter: hue-rotate(0deg)   saturate(2) brightness(1.2); }
+    50%  { filter: hue-rotate(180deg) saturate(3) brightness(1.5); }
+    100% { filter: hue-rotate(360deg) saturate(2) brightness(1.2); }
+}
+
+.video-grid {
+	display: flex;
+	flex-wrap: wrap;     
+	gap: 20px;           
+	justify-content: center; 
+	margin-top: 15px;
+}
+
+.video-card {
+	width: calc(50% - 10px); 
+	min-width: 280px;        
+	text-align: center;
+}
+
+
+.video-card video {
+	width: 100%;             
+	display: block;
+}
+
+
+.video-caption {
+	font-size: 10px;
+	color: #222222;
+	margin-top: 8px;
+	line-height: 1.4;
+}
+
+
+.video-list {
+	text-align: center;      
+	background: #f0f0f0;
+	padding: 30px;           
+}
+
+.disclaimer-text {
+	font-size: 10px;       
+	color: #666666;        
+	line-height: 1.6;      
+	margin-top: 180px;      
+	text-align: center;    
+	max-width: 90%;        
+	margin-left: auto;     
+	margin-right: auto;
+}
+
+	</style>
+</head>
+<body>
+
+	<div class="main-window">
+
+		<h1>22.09.2026</h1>
+		<h2>Здравствуйте! Это первая попытка создать архив по нашей группе FARMBUSTERS! На данном сайте планируются папки с нашими рисунками, скриншотами, музыкой, видео и т.д.</h2>
+		<h2>Крайне уместное звуковое сопровождение!!</h2>
+		
+		<!-- Главное меню с кнопкой вызова папки -->
+		<div class="menu-box">
+		<a href="#social-folder" class="pixel-btn">СОЦСЕТИ</a>
+		<a href="#dates-folder" class="pixel-btn">ДАТЫ</a>
+		<a href="#music-folder" class="pixel-btn">МУЗЫКА</a>
+		<a href="#drawings-folder" class="pixel-btn">РИСУНКИ</a>
+		<a href="#video-folder" class="pixel-btn">ВИДЕО</a>
+		<a href="#screenshots-folder" class="pixel-btn">СКРИНШОТЫ</a>
+		<a href="#records-folder" class="pixel-btn">ЗАПИСИ</a>
+		<a href="#manual-folder" class="pixel-btn">ИНСТРУКЦИЯ</a>
+
+		<p class="disclaimer-text">
+			[ ДИСКЛЕЙМЕР: ВСЕ МАТЕРИАЛЫ, РИСУНКИ, МУЗЫКА И ВИДЕО ПРИНАДЛЕЖАТ ИХ АВТОРАМ И ГРУППЕ FARMBUSTERS. ДАННЫЙ САЙТ ЯВЛЯЕТСЯ НЕКОММЕРЧЕСКИМ ФАНАТСКИМ АРХИВОМ И НЕ ИМЕЕТ ЦЕЛИ НАРУШИТЬ ЧЬИ-ЛИБО АВТОРСКИЕ ПРАВА. ]
+		</p>
+
+</div>
+
+		<div class="bottom-gif gif-ruvruv">
+			<img src="кирув1.gif" width="80" alt="">
+		</div>
+
+		<div class="bottom-gif gif-sarvsarv">
+			<img src="сарве1.gif" width="80" alt="">
+		</div>
+
+		<div class="bottom-gif gif-kisskiss">
+			<img src="авав.gif" width="80" alt="">
+		</div>
+
+		<div class="bottom-gif gif-dekudeku">
+			<img src="декдек.gif" width="80" alt="">
+		</div>
+
+		<div class="image-fixed">
+			<img src="Без названия1027.png" width="300" alt="Archive">
+		</div>
+
+		<div class="nyan-cat">
+			<img src="cat.gif" width="150">
+		</div>
+
+		<div class="audio-fixed">
+		<audio src="original.mp3" autoplay loop controls></audio>
+		</div>
+
+	</div>
+
+	<div id="drawings-folder" class="overlay">
+		<div class="folder-popup folder-low">
+			<a href="#" class="close-folder">[X]</a>
+			<h3>АРХИВ РИСУНКОВ</h3>
+			
+			<div class="member-tabs">
+				<a href="#draw-kiruvia" class="tab-btn">
+					<img src="kiruvia.jpg" alt="Кирувия"><br>КИРУВИЯ
+				</a>
+				<a href="#draw-sarvenica" class="tab-btn">
+					<img src="sarvenica.jpg" alt="Сарвеника"><br>САРВЕНИКА
+				</a>
+				<a href="#draw-kislitsa" class="tab-btn">
+					<img src="kislitsa.jpg" alt="Кислица"><br>КИСЛИЦА
+				</a>
+				<a href="#draw-deku" class="tab-btn">
+					<img src="deku.jpg" alt="Деку"><br>ДЕКУ
+				</a>
+			</div>
+			<p style="font-size: 11px; color: #666;">Выберите участника, чтобы открыть его рисуночки!</p>
+		</div>
+	</div>
+
+	<div id="draw-kiruvia" class="overlay">
+		<div class="folder-popup">
+			<a href="#drawings-folder" class="close-folder">[НАЗАД]</a>
+			<h3>РИСУНКИ / КИРУВИЯ</h3>
+			<div class="video-list">
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="draw-sarvenica" class="overlay">
+		<div class="folder-popup">
+			<a href="#drawings-folder" class="close-folder">[НАЗАД]</a>
+			<h3>РИСУНКИ / САРВЕНИКА</h3>
+				<div class="video-list">
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="draw-kislitsa" class="overlay">
+		<div class="folder-popup">
+			<a href="#drawings-folder" class="close-folder">[НАЗАД]</a>
+			<h3>РИСУНКИ / КИСЛИЦА</h3>
+				<div class="video-list">
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="draw-deku" class="overlay">
+		<div class="folder-popup">
+			<a href="#drawings-folder" class="close-folder">[НАЗАД]</a>
+			<h3>РИСУНКИ / ДЕКУ</h3>
+				<div class="video-list">
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div id="video-folder" class="overlay">
+		<div class="folder-popup folder-low">
+			<a href="#" class="close-folder">[X]</a>
+			<h3>АРХИВ ВИДЕО</h3>
+			
+			<div class="member-tabs">
+				<a href="#vid-kiruvia" class="tab-btn">
+					<img src="kiruvia.jpg" alt="Кирувия"><br>КИРУВИЯ
+				</a>
+				<a href="#vid-sarvenica" class="tab-btn">
+					<img src="sarvenica.jpg" alt="Сарвеника"><br>САРВЕНИКА
+				</a>
+				<a href="#vid-kislitsa" class="tab-btn">
+					<img src="kislitsa.jpg" alt="Кислица"><br>КИСЛИЦА
+				</a>
+				<a href="#vid-deku" class="tab-btn">
+					<img src="deku.jpg" alt="Деку"><br>ДЕКУ
+				</a>
+			</div>
+			<p style="font-size: 11px; color: #666;">Выберите участника, чтобы открыть его видосики!</p>
+		</div>
+	</div>
+
+		<div id="vid-kiruvia" class="overlay">
+		<div class="folder-popup">
+			<a href="#video-folder" class="close-folder">[НАЗАД]</a>
+			<h3>ВИДЕО / КИРУВИЯ</h3>
+			
+			<div class="video-list">
+				
+				<div class="video-grid">
+					
+					<div class="video-card">
+						<video src="вид1.mp4" controls></video>
+						<p class="video-caption">27.02.2026</p>
+					</div>
+
+					<div class="video-card">
+						<video src="вид2.mp4" controls></video>
+						<p class="video-caption">03.03.2026</p>
+					</div>
+
+					<div class="video-card">
+						<video src="вид3.mp4" controls></video>
+						<p class="video-caption">12.09.2026</p>
+					</div>
+
+					<div class="video-card">
+						<video src="вид4.mp4" controls></video>
+						<p class="video-caption">16.09.2026</p>
+					</div>
+					
+				</div>
+
+			</div> <!-- Конец video-list -->
+		</div>
+	</div>
+
+
+
+	<div id="vid-sarvenica" class="overlay">
+				<div class="folder-popup">
+			<a href="#video-folder" class="close-folder">[НАЗАД]</a>
+			<h3>ВИДЕО / САРВЕНИКА</h3>
+			
+			<!-- ИЗМЕНЕНИЕ ТУТ: заменили music-list на video-list -->
+			<div class="video-list">
+				
+				<div class="video-grid">
+					
+					<div class="video-card">
+						<video src="видсарв1.mp4" controls></video>
+						<p class="video-caption">19.09.2026</p>
+					</div>
+
+					<div class="video-card">
+						<video src="видсарв2.mp4" controls></video>
+						<p class="video-caption">20.09.2026</p>
+					</div>
+					
+				</div>
+
+			</div> <!-- Конец video-list -->
+		</div>
+	</div>
+
+
+	<div id="vid-kislitsa" class="overlay">
+		<div class="folder-popup">
+			<a href="#video-folder" class="close-folder">[НАЗАД]</a>
+			<h3>ВИДЕО / КИСЛИЦА</h3>
+			<div class="video-list">
+				<!-- text-align: center гарантирует положение строго по центру -->
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+</div>
+		</div>
+	</div>
+
+	<div id="vid-deku" class="overlay">
+		<div class="folder-popup">
+			<a href="#video-folder" class="close-folder">[НАЗАД]</a>
+			<h3>ВИДЕО / ДЕКУ</h3>
+			<div class="video-list">
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="music-folder" class="overlay">
+		<div class="folder-popup folder-low">
+			<a href="#" class="close-folder">[X]</a>
+			<h3>МУЗЫКАЛЬНЫЙ АРХИВ</h3>
+			
+			<!-- Кнопки участников внутри папки -->
+			<div class="member-tabs">
+	<a href="#kiruvia" class="tab-btn">
+		<img src="kiruvia.jpg" alt="Кирувия"><br>
+		КИРУВИЯ
+	</a>
+	<a href="#sarvenica" class="tab-btn">
+		<img src="sarvenica.jpg" alt="Сарвеника"><br>
+		САРВЕНИКА
+	</a>
+	<a href="#kislitsa" class="tab-btn">
+		<img src="kislitsa.jpg" alt="Кислица"><br>
+		КИСЛИЦА
+	</a>
+	<a href="#deku" class="tab-btn">
+		<img src="deku.jpg" alt="Деку"><br>
+		ДЕКУ
+	</a>
+</div>
+
+			<p style="font-size: 11px; color: #666;">Выберите участника выше, чтобы открыть его песенки!</p>
+		</div>
+	</div>
+
+	<!-- ПОД-ПАПКИ УЧАСТНИКОВ (ОТДЕЛЬНЫЕ ОКНА) -->
+	<div id="kiruvia" class="overlay">
+		<div class="folder-popup">
+			<a href="#music-folder" class="close-folder">[НАЗАД]</a>
+			<h3>ПЕСНИ / КИРУВИЯ</h3>
+			<img src="кирувишка.gif" class="folder-popup-gif">
+			<img src="урауа.gif" class="folder-popit-gif">
+			<div class="music-list">
+				<div style="height: 70px;"></div>
+				1. Mindless Self Indulgence - Do Unto Others<br>
+				<audio src="кирувия666.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				2. Mindless Self Indulgence - For The Love of God <br>
+				<audio src="кирувия676.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				3. Mindless Self Indulgence - Memory of Heaven<br>
+				<audio src="кирувия678.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				4. Mindless Self Indulgence - Married Alive<br>
+				<audio src="кирувия673.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				5. Mindless Self Indulgence – Personal Jesus<br>
+				<audio src="кирувия677.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				6. FORTUNA 812 - Кошмар<br>
+				<audio src="кирувия668.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				7. FORTUNA 812 - ParisLove<br>
+				<audio src="кирувия674.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				8. FORTUNA 812 - Ангел<br>
+				<audio src="кирувия669.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				9. Сметана band - Ничего не чувствую<br>
+				<audio src="кирувия670.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				10. Три дня дождя - Тебя любить<br>
+				<audio src="кирувия671.mp3" controls style="margin-top:10px; width:100%;"></audio>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="sarvenica" class="overlay">
+		<div class="folder-popup">
+			<a href="#music-folder" class="close-folder">[НАЗАД]</a>
+			<h3>ПЕСНИ / САРВЕНИКА</h3>
+			<img src="дабс.gif" class="folder-popup-gif">
+			<img src="урауа.gif" class="folder-popit-gif">
+			<div class="music-list">
+				<div style="height: 70px;"></div>
+				1. halacg - your monster<br>
+				<audio src="сарв1.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				2. needy girl overdose - internet yamero<br>
+				<audio src="сарв2.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				3. mindless self indulgence - you're no fun anymore<br>
+				<audio src="сарв3.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				4. mindless self indulgence - sex for homework<br>
+				<audio src="сарв4.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				5. автостопом по фазе сна - Мам, я умираю<br>
+				<audio src="сарв5.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				6. fever 333 - Hellfire<br>
+				<audio src="сарв6.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				7. bohnes - Middle finger<br>
+				<audio src="сарв7.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				8. монеточка - Гори Гори Гори<br> 
+				<audio src="сарв8.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				9. divide music - Burn it to the ground<br>
+				<audio src="сарв9.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				10. johnald - my world now<br>
+				<audio src="сарв10.mp3" controls style="margin-top:10px; width:100%;"></audio>
+			</div>
+		</div>
+	</div>
+
+	<div id="kislitsa" class="overlay">
+		<div class="folder-popup">
+			<a href="#music-folder" class="close-folder">[НАЗАД]</a>
+			<h3>ПЕСНИ / КИСЛИЦА</h3>
+			<img src="КИСЛИЦАМОМЕНТ.gif" class="folder-popup-gif">
+			<img src="урауа.gif" class="folder-popit-gif">
+			<div class="music-list">
+				<div style="height: 70px;"></div>
+				1.HyunJin (100% live) - Around you<br>
+				<audio src="кисс1.m4a" controls style="margin-top:10px; width:100%;"></audio>
+				2. HoyoFair x C1naH - Moonphase Waltz<br>
+				<audio src="кисс2.m4a" controls style="margin-top:10px; width:100%;"></audio>
+				3.  Jake Daniels - Jeepers Creepers<br>
+				<audio src="кисс3.m4a" controls style="margin-top:10px; width:100%;"></audio>
+				4. HALCALI - Otsukare Summer<br>
+				<audio src="кисс4.m4a" controls style="margin-top:10px; width:100%;"></audio>
+				5. VIVINOS - Wiege<br>
+				<audio src="кисс5.m4a" controls style="margin-top:10px; width:100%;"></audio>
+				6. VIVINOS - Sweet Dreams<br>
+				<audio src="кисс6.m4a" controls style="margin-top:10px; width:100%;"></audio>
+				7. Nastyona - iguanaz. 11<br>
+				<audio src="кисс7.m4a" controls style="margin-top:10px; width:100%;"></audio>
+				8. MEMI - Sorry for my late reply<br>
+				<audio src="кисс8.m4a" controls style="margin-top:10px; width:100%;"></audio>
+				9. Glass Animals - Take a Slice<br>
+				<audio src="кисс9.m4a" controls style="margin-top:10px; width:100%;"></audio>
+				10. Glass Animals - Pork Soda<br>
+				<audio src="кисс10.m4a" controls style="margin-top:10px; width:100%;"></audio>
+
+
+			</div>
+		</div>
+	</div>
+
+	<div id="deku" class="overlay">
+		<div class="folder-popup">
+			<a href="#music-folder" class="close-folder">[НАЗАД]</a>
+			<h3>ПЕСНИ / ДЕКУ</h3>
+			<img src="декуку.gif" class="folder-popup-gif">
+			<img src="урауа.gif" class="folder-popit-gif">
+			<div class="music-list">
+				<div style="height: 70px;"></div>
+				1. Saint Vice - LIKE SIN<br>
+				<audio src="деку1.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				2. Jah Khalib - Медина<br>
+				<audio src="деку2.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				3. Lost Sky - Fearless<br>
+				<audio src="деку3.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				4. Fifth Harmony - That's My Girl<br>
+				<audio src="деку4.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				5. Порез на собаке - Подглядел<br>
+				<audio src="деку5.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				6. Rihanna - S&M<br>
+				<audio src="деку6.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				7. Eiffel 65 - Move Your Body<br>
+				<audio src="деку7.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				8. R I N - crush x burnt rice<br>
+				<audio src="деку8.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				9. Cece Natalie - Exiting<br>
+				<audio src="деку9.mp3" controls style="margin-top:10px; width:100%;"></audio>
+				10. AND ONE - Driving with my Darling<br>
+				<audio src="деку10.mp3" controls style="margin-top:10px; width:100%;"></audio>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+		const allMedia = document.querySelectorAll('audio, video');
+
+		allMedia.forEach(media => {
+
+			media.addEventListener('play', () => {
+
+				allMedia.forEach(otherMedia => {
+					if (otherMedia !== media) {
+						otherMedia.pause();
+					}
+				});
+			});
+		});
+	</script>
+
+	<div id="screenshots-folder" class="overlay">
+		<div class="folder-popup">
+			<a href="#" class="close-folder">[X]</a>
+			<h3>АРХИВ СКРИНШОТОВ</h3>
+			<div class="video-list">
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="records-folder" class="overlay">
+		<div class="folder-popup">
+			<a href="#" class="close-folder">[X]</a>
+			<h3>АРХИВ ЗАПИСЕЙ</h3>
+			<div class="video-list">
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="dates-folder" class="overlay">
+		<div class="folder-popup">
+			<a href="#" class="close-folder">[X]</a>
+			<h3>ВАЖНЫЕ ДАТЫ</h3>
+			<div class="video-list">
+				<p style="font-size: 14px; color: #222; text-align: left; margin: 10px 0;">
+					<b>29.06.2024</b> - день знакомства
+				</p>
+
+				<p style="font-size: 14px; color: #222; text-align: left; margin: 10px 0;">
+					<b>14.07.2024</b> - день создания группы
+				</p>
+
+				<p style="font-size: 14px; color: #222; text-align: left; margin: 10px 0;">
+					<b>12.03.2007</b> - день рождения Кирувии
+				</p>
+
+				<p style="font-size: 14px; color: #222; text-align: left; margin: 10px 0;">
+					<b>12.04.2012</b> - день рождения Кислицы
+				</p>
+
+				<p style="font-size: 14px; color: #222; text-align: left; margin: 10px 0;">
+					<b>23.06.2012</b> - день рождения Сарвеники
+				</p>
+
+				<p style="font-size: 14px; color: #222; text-align: left; margin: 10px 0;">
+					<b>21.08.2006</b> - день рождения Деку
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="manual-folder" class="overlay">
+		<div class="folder-popup">
+			<a href="#" class="close-folder">[X]</a>
+			<h3>ИНСТРУКЦИЯ</h3>
+			<div class="video-list">
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+			</div>
+		</div>
+	</div>
+
+<div id="social-folder" class="overlay">
+		<div class="folder-popup">
+			<a href="#" class="close-folder">[X]</a>
+			<h3>СОЦСЕТИ</h3>
+			<div class="video-list">
+				<p style="font-size: 12px; color: #666666; margin: 50px 0; text-align: center; width: 100%;">
+					[ В ПРОЦЕССЕ ]
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
